@@ -1,5 +1,6 @@
 import re
 
+
 def normalize_phone(num: str) -> str:
     normalized_num = re.sub('[^+0-9]', '', num)
 
@@ -8,11 +9,12 @@ def normalize_phone(num: str) -> str:
 
     if normalized_num.startswith('80'):
         return f'+3{normalized_num}'
-    
+
     if normalized_num.startswith('380'):
         return f'+{normalized_num}'
 
     return normalized_num
+
 
 raw_numbers = [
     "067\\t123 4567",
@@ -29,4 +31,3 @@ raw_numbers = [
 
 sanitized_numbers = [normalize_phone(num) for num in raw_numbers]
 print("Normalized numbers for SMS-campaign:", sanitized_numbers)
-
