@@ -19,6 +19,7 @@ def normalize_phone(num: str) -> str:
         if match:
             return complement + normalized_num
         
+    # edge case
     return normalized_num
 
 
@@ -36,7 +37,8 @@ raw_numbers = [
     "432 11 222 22 22",
     "44-212-22-22",
     "+380 (6565) 33 333 33 ",
-    " (6131) 354646"
+    " (6131) 354646",
+    "+31-24-3611111" # edge case: NL number
 ]
 
 sanitized_numbers = [normalize_phone(num) for num in raw_numbers]
