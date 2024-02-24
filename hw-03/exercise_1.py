@@ -5,7 +5,7 @@ def get_days_from_today(date: str) -> int:
     try:
         converted_date = datetime.strptime(date, '%Y-%m-%d')
         today = datetime.today()
-        return (converted_date - today).days
+        return (today - converted_date).days
     except ValueError:
         print(f'Entered date "{date}" doesn\'t match format: YYYY-MM-DD')
 
