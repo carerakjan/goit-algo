@@ -10,8 +10,11 @@ def normalize_phone(num: str) -> str:
         '^[1-9]': '+380'
     }
 
-    if normalized_num.startswith('+380'):
+    if normalized_num.startswith('+'):
         return normalized_num
+    
+    if len(normalized_num) >= 12:
+        return f'+{normalized_num}'
     
     for search, complement in prefixes_map.items():
         match = re.search(search, normalized_num); 
@@ -38,7 +41,7 @@ raw_numbers = [
     "44-212-22-22",
     "+380 (6565) 33 333 33 ",
     " (6131) 354646",
-    "+31-24-3611111" # edge case: NL number
+    "+31-24-3611111"
 ]
 
 sanitized_numbers = [normalize_phone(num) for num in raw_numbers]
