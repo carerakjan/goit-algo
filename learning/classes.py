@@ -1,36 +1,23 @@
-class WriteFile:
-    def __init__(self, fileName: str, message: str) -> None:
-        try:
-            self.file = open(fileName, 'r+', encoding='utf-8')
-        except:
-            self.file = open(fileName, 'w+', encoding='utf-8')
-
-        lines = self.file.readlines()
-        index = 0
-
-        if len(lines) > 0:
-            last = lines[-1]
-            index = int(last.split(':')[0]) + 1
-
-        self.file.write(f'{index}:{message}\n')
-
-
-    def __del__(self) -> None:
-        self.file.close()
-
-
 from pathlib import Path
+from datetime import datetime
 
-# Початковий шлях
-base_path = Path("log.txt")
+today = datetime.today()
+timestamp = today.strftime('%Y%m%d')
+base_path = Path(f"log_{timestamp}.txt")
 
-def log(base_path: Path, message: str, level=0) -> None:
+
+def log(path: Path, message: str, level=0) -> None:
     text = ''
-    if base_path.exists():
-        text = base_path.read_text()
+    lines = 0
+
+    if path.exists():
+        text = path.read_text()
+        lines = len(text.split('\n'))
         text += '\n'
+
     log_levels = ('log', 'warn', 'err')
-    base_path.write_text(f'{text}[{log_levels[level]}] -> {message}')
+    path.write_text(f'{text}{lines}:[{log_levels[level]}] -> {message}')
+
 
 log(base_path, 'hello')
 log(base_path, 'hello1', level=1)
