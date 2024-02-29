@@ -1,0 +1,6 @@
+[log] -> hello
+[warn] -> hello1
+[err] -> hello2
+[log] -> hello
+[warn] -> hello1
+[err] -> hello2

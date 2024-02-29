@@ -19,10 +19,19 @@ class WriteFile:
         self.file.close()
 
 
-def log(file: str, message: str, level=0) -> None:
-    log_levels = ('log', 'warn', 'err')
-    WriteFile(fileName=file, message=f'[{log_levels[level]}] -> {message}')
+from pathlib import Path
 
-log('log.txt', 'hello')
-log('log.txt', 'hello1', level=1)
-log('log.txt', 'hello2', level=2)
+# Початковий шлях
+base_path = Path("log.txt")
+
+def log(base_path: Path, message: str, level=0) -> None:
+    text = ''
+    if base_path.exists():
+        text = base_path.read_text()
+        text += '\n'
+    log_levels = ('log', 'warn', 'err')
+    base_path.write_text(f'{text}[{log_levels[level]}] -> {message}')
+
+log(base_path, 'hello')
+log(base_path, 'hello1', level=1)
+log(base_path, 'hello2', level=2)
