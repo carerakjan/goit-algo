@@ -4,24 +4,24 @@ import re
 def normalize_phone(num: str) -> str:
     normalized_num = re.sub('[^+0-9]', '', num)
     prefixes_map = {
-        '^0': '+38', 
-        '^80': '+3', 
+        '^0': '+38',
+        '^80': '+3',
         '^380': '+',
         '^[1-9]': '+380'
     }
 
     if normalized_num.startswith('+'):
         return normalized_num
-    
+
     if len(normalized_num) >= 12:
         return f'+{normalized_num}'
-    
+
     for search, complement in prefixes_map.items():
-        match = re.search(search, normalized_num); 
+        match = re.search(search, normalized_num)
 
         if match:
             return complement + normalized_num
-        
+
     # edge case
     return normalized_num
 
