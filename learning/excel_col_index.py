@@ -59,10 +59,10 @@ def index_of_colunm(col: str) -> int:
 
     print(f'tracing of calculation "{col}" index:')
     for char, idx in reversed(trace):
-        print(f'{char}: 26^{idx} * ({ord(char)} - 64) +')
+        print(f'{char}: 26^{idx} * ({ord(char)} - 64) {'+' if idx > 0 else '='}')
 
     return index
 
 
-print(f'Index: {index_of_colunm('ABA')}')
+print(f'Index: {index_of_colunm('ABCDEF')}')
 
