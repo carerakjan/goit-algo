@@ -51,13 +51,18 @@ AAAA    -           26^3 * (65 - 64) + 26^2 * (65 - 64) + 26^1 * (65 - 64) + 26^
 
 def index_of_colunm(col: str) -> int:
     index = 0
-    print(f'tracing of calculation "{col}" index:')
+    trace = []
+    
     for idx, char in enumerate(reversed(col)):
-        print(char, idx)
+        trace.append((char, idx))
         index += 26 ** idx * (ord(char) - 64)
+
+    print(f'tracing of calculation "{col}" index:')
+    for char, idx in reversed(trace):
+        print(f'{char}: 26^{idx} * ({ord(char)} - 64) +')
 
     return index
 
 
-print(f'index: {index_of_colunm('ABC')}')
+print(f'Index: {index_of_colunm('ABA')}')
 
