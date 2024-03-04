@@ -8,7 +8,17 @@ def show_error(err: str):
 
 
 def get_colors(is_dir: bool):
-    return (Fore.CYAN if is_dir else Fore.GREEN, Fore.RESET)
+    return Fore.CYAN if is_dir else Fore.GREEN, Fore.RESET
+
+
+def get_assets():
+    return {
+        'ROOT': '📦',
+        'DIR': '📂',
+        'FILE': '📜',
+        'LINE': '┃',
+        'LINE_2': '┣'
+    }
 
 
 def print_path(source_path: Path, depth=0, depth_limit=20):
@@ -16,9 +26,12 @@ def print_path(source_path: Path, depth=0, depth_limit=20):
         return
 
     is_dir = source_path.is_dir()
-    offset = Style.DIM + Fore.CYAN + '| ' * (depth - 1) + '|_' + Style.RESET_ALL if depth else ''
+    assets = get_assets()
+    offset = Style.DIM + Fore.CYAN + (assets['LINE'] + ' ') * (depth - 1) + assets[
+        'LINE_2'] + ' ' + Style.RESET_ALL if depth else ''
+    asset = assets['ROOT'] if depth == 0 else assets['DIR'] if is_dir else assets['FILE']
     color, reset = get_colors(is_dir)
-    print(f'{offset}{color}{source_path.absolute().name}{reset}')
+    print(f'{offset}{asset}{color}{source_path.absolute().name}{reset}')
 
     if source_path.is_dir():
         for dir_or_file in sorted(source_path.iterdir()):
