@@ -16,9 +16,9 @@ def print_path(source_path: Path, depth=0, depth_limit=20):
         return
 
     is_dir = source_path.is_dir()
-    offset = Style.DIM + '| ' * (depth - 1) + '|_' + Style.RESET_ALL if depth else ''
+    offset = Style.DIM + Fore.CYAN + '| ' * (depth - 1) + '|_' + Style.RESET_ALL if depth else ''
     color, reset = get_colors(is_dir)
-    print(f'{offset}{color}{source_path.name}{reset}')
+    print(f'{offset}{color}{source_path.absolute().name}{reset}')
 
     if source_path.is_dir():
         for dir_or_file in sorted(source_path.iterdir()):
