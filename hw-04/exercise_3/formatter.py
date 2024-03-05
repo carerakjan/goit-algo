@@ -1,20 +1,22 @@
 from colorama import Fore, Style
 
+assets = {
+    'ROOT': '📦',
+    'DIR': '📂',
+    'FILE': '📜',
+    'LINE': '┃',
+    'LINE_2': '┣'
+}
+
+colors = {
+    'DEFAULT': (Fore.CYAN, Fore.GREEN),
+    'ASSETS': (Fore.LIGHTYELLOW_EX, Fore.LIGHTWHITE_EX)
+}
+
 
 def get_colors(is_dir: bool, beautify: bool):
-    if beautify:
-        return Fore.LIGHTYELLOW_EX if is_dir else Fore.LIGHTWHITE_EX, Fore.RESET
-    return Fore.CYAN if is_dir else Fore.GREEN, Fore.RESET
-
-
-def get_assets():
-    return {
-        'ROOT': '📦',
-        'DIR': '📂',
-        'FILE': '📜',
-        'LINE': '┃',
-        'LINE_2': '┣'
-    }
+    dir_color, file_color = colors['ASSETS' if beautify else 'DEFAULT']
+    return dir_color if is_dir else file_color, Fore.RESET
 
 
 def format_path(path_name: str, is_dir: bool, depth: int, beautify=False):
@@ -22,7 +24,6 @@ def format_path(path_name: str, is_dir: bool, depth: int, beautify=False):
     asset = ''
 
     if beautify:
-        assets = get_assets()
         offset = (assets['LINE'] + ' ') * (depth - 1) + assets['LINE_2'] if depth else ''
         asset = (assets['ROOT'] if depth == 0 else assets['DIR'] if is_dir else assets['FILE']) + ' '
 
