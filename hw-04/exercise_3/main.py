@@ -1,7 +1,7 @@
 import sys
 from pathlib import Path
 from colorama import Fore
-from template import template
+from formatter import format_path
 
 
 def print_path(source_path: Path, beautify: bool, depth=0, depth_limit=20):
@@ -9,7 +9,7 @@ def print_path(source_path: Path, beautify: bool, depth=0, depth_limit=20):
         return
 
     is_dir = source_path.is_dir()
-    template(source_path.absolute().name, is_dir=is_dir, depth=depth, beautify=beautify)
+    format_path(source_path.absolute().name, is_dir=is_dir, depth=depth, beautify=beautify)
 
     if is_dir:
         for dir_or_file in sorted(source_path.iterdir()):

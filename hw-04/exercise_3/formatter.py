@@ -17,7 +17,7 @@ def get_assets():
     }
 
 
-def template(path_name: str, is_dir: bool, depth: int, beautify=False):
+def format_path(path_name: str, is_dir: bool, depth: int, beautify=False):
     offset = Style.DIM + Fore.CYAN + '| ' * (depth - 1) + '|_' + Style.RESET_ALL if depth else ''
     asset = ''
 
