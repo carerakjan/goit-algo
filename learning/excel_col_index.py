@@ -63,6 +63,19 @@ def index_of_colunm(col: str) -> int:
 
     return index
 
+def index_of_colunm_recur(col: str) -> int:
+    char = col[0]
+    power = len(col) - 1
+    return 0 if not col else (26 ** power * (ord(char) - 64) + index_of_colunm_recur(col[1:]))   
 
-print(f'Index: {index_of_colunm('ABCDEF')}')
+def main():
+    while(True):
+        value = input('Enter column (0 - exit):')
+        if (value == '0'):
+            break
+        print(f'Index: {index_of_colunm(value.upper())}')
+        print(f'Index Recur: {index_of_colunm_recur(value.upper())}')
 
+
+if __name__ == '__main__':
+    main()
