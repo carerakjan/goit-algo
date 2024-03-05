@@ -64,9 +64,12 @@ def index_of_colunm(col: str) -> int:
     return index
 
 def index_of_colunm_recur(col: str) -> int:
+    if not col:
+        return 0
+    
     char = col[0]
     power = len(col) - 1
-    return 0 if not col else (26 ** power * (ord(char) - 64) + index_of_colunm_recur(col[1:]))   
+    return (26 ** power * (ord(char) - 64) + index_of_colunm_recur(col[1:]))
 
 def main():
     while(True):
