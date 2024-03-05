@@ -1,4 +1,5 @@
-from colorama import Fore, Back, Style
+from colorama import Fore, Style
+
 
 def get_colors(is_dir: bool, beautify: bool):
     if beautify:
@@ -15,10 +16,11 @@ def get_assets():
         'LINE_2': '┣'
     }
 
-def template(path_name:str, is_dir: bool, depth: int, beautify = False):
+
+def template(path_name: str, is_dir: bool, depth: int, beautify=False):
     offset = Style.DIM + Fore.CYAN + '| ' * (depth - 1) + '|_' + Style.RESET_ALL if depth else ''
     asset = ''
-    
+
     if beautify:
         assets = get_assets()
         offset = (assets['LINE'] + ' ') * (depth - 1) + assets['LINE_2'] if depth else ''

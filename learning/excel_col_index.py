@@ -49,10 +49,11 @@ ABA     -           26^2 * (65 - 64) + 26^1 * (66 - 64) + 26^0 * (65 - 64) = 729
 AAAA    -           26^3 * (65 - 64) + 26^2 * (65 - 64) + 26^1 * (65 - 64) + 26^0 * (65 - 64) = ???
 """
 
+
 def index_of_colunm(col: str) -> int:
     index = 0
     trace = []
-    
+
     for idx, char in enumerate(reversed(col)):
         trace.append((char, idx))
         index += 26 ** idx * (ord(char) - 64)
@@ -63,18 +64,20 @@ def index_of_colunm(col: str) -> int:
 
     return index
 
+
 def index_of_colunm_recur(col: str) -> int:
     if not col:
         return 0
-    
+
     char = col[0]
     power = len(col) - 1
-    return (26 ** power * (ord(char) - 64) + index_of_colunm_recur(col[1:]))
+    return 26 ** power * (ord(char) - 64) + index_of_colunm_recur(col[1:])
+
 
 def main():
-    while(True):
+    while True:
         value = input('Enter column (0 - exit):')
-        if (value == '0'):
+        if value == '0':
             break
         print(f'Index: {index_of_colunm(value.upper())}')
         print(f'Index Recur: {index_of_colunm_recur(value.upper())}')
