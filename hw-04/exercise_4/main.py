@@ -3,25 +3,26 @@ def parse_input(user_input):
     cmd = cmd.strip().lower()
     return cmd, *args
 
+
 def add_contact(args, contacts):
     name, phone = args
     contacts[name] = phone
     return "Contact added."
+
 
 def change_contact(args, contacts):
     name, phone = args
     contacts[name] = phone
     return 'Contact updated.'
 
+
 def show_phone(args, contacts):
-    name, _ = args
-    return contacts[name]
+    return contacts[args[0]]
+
 
 def show_all(contacts):
-    result = ''
-    for name, num in contacts.items():
-        result += f'\n{name}: {num}'
-    return result[1:]
+    return '\n'.join([f'{name}, {num}' for name, num in contacts.items()])
+
 
 def main():
     contacts = {}
@@ -45,6 +46,7 @@ def main():
             print(show_all(contacts))
         else:
             print("Invalid command.")
+
 
 if __name__ == "__main__":
     main()
