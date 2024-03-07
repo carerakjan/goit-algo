@@ -7,7 +7,7 @@ def generate(amount: int):
     mu = 100
     sigma = 50
     for i in range(amount):
-        num.append(random.gauss(mu, sigma))
+        num.append(round(random.gauss(mu, sigma), 3))
     return num
 
 
@@ -30,7 +30,7 @@ def main():
     while True:
         data_len = len(data_sorted)
         data_mean = st.mean(data_sorted)
-        data_stdev = st.stdev(data_sorted)
+        data_stdev = st.stdev(data_sorted, data_mean)
         data_max = max(data_sorted)
         data_min = min(data_sorted)
 
